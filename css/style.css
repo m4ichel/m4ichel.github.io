@@ -502,6 +502,10 @@ html.no-fx .h2 { text-shadow: none; transform: none; }
   .mon-hint { font-size: 9px; }
   .hero-bottom { margin-bottom: 56px; }
 }
+/* celulares estreitos: o relógio sai para caberem logo, PT/EN e FX */
+@media (max-width: 400px) {
+  #clock { display: none; }
+}
 @media (prefers-reduced-motion: reduce) {
   .crt, .crt::after, .blink { animation: none; }
   html { scroll-behavior: auto; }
