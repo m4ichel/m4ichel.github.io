@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lucas Michel Pereira — portfolio</title>
+<meta name="description" content="Lucas Michel Pereira — estudante de Ciência da Computação no Inteli. Data Science, Engenharia de Software e Otimização, com projetos para Banco PAN, Grupo Globo, Suzano e Fadel.">
+<meta name="theme-color" content="#06050b">
+<meta property="og:title" content="Lucas Michel Pereira — portfolio">
+<meta property="og:description" content="Data Science · Engenharia de Software · Otimização">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%2306050b'/%3E%3Crect x='3' y='3' width='3' height='10' fill='%23ff2bd6'/%3E%3Crect x='3' y='10' width='6' height='3' fill='%23ff2bd6'/%3E%3Crect x='10' y='3' width='3' height='3' fill='%234fd8ff'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Unbounded:wght@600;800;900&family=VT323&display=swap">
+<link rel="stylesheet" href="css/style.css">
+<script>
+  document.documentElement.classList.add('js');
+  try {
+    if (sessionStorage.getItem('lmp-booted') || matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.documentElement.classList.add('skip-boot');
+    }
+  } catch (e) {}
+</script>
+</head>
+<body>
+
+<!-- ============ BOOT ============ -->
+<div id="boot" aria-hidden="true">
+  <div class="boot-inner">
+    <div id="boot-lines"></div>
+    <div class="boot-bar"><span id="boot-fill"></span></div>
+    <div class="boot-skip" data-i18n="boot.skip">clique ou pressione qualquer tecla para pular</div>
+  </div>
+</div>
+
+<!-- ============ CAMADAS DE EFEITO ============ -->
+<div id="led" aria-hidden="true"><i></i></div>
+<canvas id="glitch" aria-hidden="true"></canvas>
+<canvas id="static" aria-hidden="true"></canvas>
+<canvas id="fx" aria-hidden="true"></canvas>
+<div id="nosignal" aria-hidden="true"><span data-i18n="nosig.t">SEM SINAL</span><small data-i18n="nosig.s">traga o cursor de volta</small></div>
+<div class="crt" aria-hidden="true"></div>
+<div id="toast" role="status" aria-live="polite"></div>
+
+<!-- ============ HUD ============ -->
+<header class="hud hud-top">
+  <a class="logo" href="#top" data-label="início" data-i18n-a="data-label:logo.l">LMP<b>://</b>sys</a>
+  <nav class="nav" aria-label="Seções" data-i18n-a="aria-label:nav.a">
+    <a href="#sobre" data-hover>01 whoami</a>
+    <a href="#stack" data-hover>02 stack</a>
+    <a href="#projetos" data-hover data-i18n="nav.3">03 projetos</a>
+    <a href="#formacao" data-hover data-i18n="nav.4">04 formação</a>
+    <a href="#contato" data-hover data-i18n="nav.5">05 contato</a>
+  </nav>
+  <div class="hud-right">
+    <span id="clock">SP --:--:--</span>
+    <button id="lang-toggle" type="button" data-label="english" aria-label="Switch to English" data-i18n-a="data-label:lang.l,aria-label:lang.a"><b data-l="pt">PT</b>/<b data-l="en">EN</b></button>
+    <button id="fx-toggle" type="button" data-label="liga/desliga efeitos" data-i18n-a="data-label:fx.l" aria-pressed="true">FX:ON</button>
+  </div>
+</header>
+<div class="hud hud-bottom" aria-hidden="true">
+  <span id="hud-xy">X:0000 Y:0000</span>
+  <span id="hud-vel">VEL:0000</span>
+  <span id="hud-ent">ENTROPIA ▯▯▯▯▯▯▯▯</span>
+  <span id="hud-fps">60 FPS</span>
+  <span class="grow"></span>
+  <span id="hud-ch">CH.00 // BOOT</span>
+</div>
+
+<main id="page">
+
+  <!-- ============ CH.01 HERO ============ -->
+  <section id="top" class="hero" data-ch="01" data-chname="SINAL" data-i18n-a="data-chname:ch.1">
+    <canvas id="holo" aria-hidden="true"></canvas>
+    <canvas id="mosaic" aria-hidden="true"></canvas>
+    <div class="hero-ui">
+      <p class="kicker wrap" data-i18n="hero.kicker"><span class="blink">●</span> portfolio.exe — v2026.10 — são paulo, sp</p>
+      <h1 class="sr-only">Lucas Michel Pereira</h1>
+      <div class="hero-bottom wrap">
+        <div class="hero-id">
+          <p class="hero-role" data-decode data-boot data-i18n="hero.role">Estudante de Ciência da Computação no Inteli</p>
+          <p class="hero-tags" data-decode data-boot data-i18n="hero.tags">data science · engenharia de software · otimização</p>
+          <div class="hero-cta">
+            <a class="btn" href="#projetos" data-hover data-i18n="hero.cta1">ver projetos</a>
+            <a class="btn ghost" href="#contato" data-hover data-i18n="hero.cta2">falar comigo</a>
+          </div>
+        </div>
+        <ul class="legend-keys" aria-label="Como interagir" data-i18n-a="aria-label:hero.keys.a">
+          <li data-i18n="hero.k1"><kbd>mover</kbd> rastreie palavras e empurre os pixels</li>
+          <li data-i18n="hero.k2"><kbd>segurar</kbd> colapse o nome numa esfera</li>
+          <li data-i18n="hero.k3"><kbd>clicar</kbd> quebre a tela</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CH.02 WHOAMI ============ -->
+  <section id="sobre" class="section" data-ch="02" data-chname="WHOAMI">
+    <div class="wrap">
+      <div class="ch"><b>CH.02</b> whoami</div>
+      <div class="about-top">
+        <div>
+          <h2 class="h2 glitchy" data-text="WHOAMI" data-decode>WHOAMI</h2>
+          <p class="lead reveal" data-i18n="about.p1">Sou estudante de Ciência da Computação no Inteli, em São Paulo, e gosto de problemas que misturam dados, matemática e engenharia. Em projetos com a <b>Suzano</b>, o <b>Banco PAN</b>, o <b>Grupo Globo</b> e a <b>Fadel Transportes</b>, trabalhei com otimização, modelagem de dados e arquitetura de sistemas, do modelo matemático até a API e a infraestrutura.</p>
+          <p class="lead reveal" data-i18n="about.p2">Hoje busco uma oportunidade em <b>Data Science</b> ou <b>Engenharia de Software</b>.</p>
+        </div>
+        <div class="stats reveal">
+          <div class="stat"><b data-count="8">08</b><span data-i18n="stat.1">projetos com empresas reais</span></div>
+          <div class="stat"><b>2028</b><span data-i18n="stat.2">formatura prevista no Inteli</span></div>
+          <div class="stat"><b>3×</b><span data-i18n="stat.3">ouro na Olimpíada Canguru de Matemática</span></div>
+          <div class="stat"><b>PT/EN</b><span data-i18n="stat.4">português nativo · inglês avançado</span></div>
+        </div>
+      </div>
+
+      <div class="about-grid">
+        <div class="term reveal" id="term" data-nocrack>
+          <div class="term-bar"><span class="dots"><i></i><i></i><i></i></span><span>lucas@inteli: ~</span><span class="grow"></span><span class="term-hint" data-i18n="term.hint">digite <b>help</b></span></div>
+          <div class="term-body" id="term-body">
+            <div class="term-out" id="term-out" data-decode>
+              <div id="term-intro" data-i18n="term.intro">
+              <div class="line"><span class="ps1">lucas@inteli:~$</span> whoami</div>
+              <div class="line hl">lucas michel pereira</div>
+              <div class="line">estudante de ciência da computação · inteli · 2025 — 2028</div>
+              <div class="line"><span class="ps1">lucas@inteli:~$</span> cat objetivo.txt</div>
+              <div class="line">buscando oportunidade em <span class="hl">data science</span> ou <span class="hl">engenharia de software</span>, com experiência prática em otimização, modelagem de dados e arquitetura de sistemas.</div>
+              <div class="line"><span class="ps1">lucas@inteli:~$</span> ls ./parceiros</div>
+              <div class="line">suzano/&nbsp;&nbsp;banco-pan/&nbsp;&nbsp;grupo-globo/&nbsp;&nbsp;fadel-transportes/</div>
+              <div class="line dim">— digite <span class="hl">help</span> para ver os comandos —</div>
+              </div>
+            </div>
+            <label class="term-input"><span class="ps1">lucas@inteli:~$</span><input id="term-in" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Terminal: digite um comando" data-i18n-a="aria-label:term.in.a"></label>
+          </div>
+        </div>
+        <figure class="donut reveal" data-nocrack>
+          <canvas id="donut" aria-label="Toro 3D renderizado em matriz de LEDs" data-i18n-a="aria-label:donut.a"></canvas>
+          <figcaption data-i18n="donut.cap"><span>donut.c // matriz de LEDs</span><span>arraste para girar · a luz segue o cursor</span></figcaption>
+          <div class="donut-read" id="donut-read">A=0.00 B=0.00</div>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CH.03 STACK ============ -->
+  <section id="stack" class="section" data-ch="03" data-chname="STACK">
+    <div class="wrap">
+      <div class="ch"><b>CH.03</b> stack.graph</div>
+      <div class="stack-head">
+        <h2 class="h2 glitchy" data-text="STACK" data-decode>STACK</h2>
+        <p class="lead reveal" data-i18n="stack.lead">Cada nó é uma tecnologia e cada aresta liga essa tecnologia a um projeto em que eu a usei. Passe o mouse para rastrear os nós, arraste para reorganizar o grafo e clique num projeto para abri-lo.</p>
+      </div>
+      <div class="legend" role="group" aria-label="Filtrar por categoria" data-i18n-a="aria-label:stack.legend.a">
+        <button class="chip" data-cat="lang" type="button" data-hover data-i18n="cat.lang">linguagens &amp; frameworks</button>
+        <button class="chip" data-cat="infra" type="button" data-hover data-i18n="cat.infra">dados &amp; infraestrutura</button>
+        <button class="chip" data-cat="data" type="button" data-hover data-i18n="cat.data">ciência de dados &amp; otimização</button>
+        <button class="chip" data-cat="fund" type="button" data-hover data-i18n="cat.fund">fundamentos</button>
+      </div>
+    </div>
+    <div class="graph-wrap" data-nocrack>
+      <canvas id="graph" aria-label="Grafo interativo de tecnologias e projetos" data-i18n-a="aria-label:graph.a"></canvas>
+      <div class="graph-tip" id="graph-tip"></div>
+    </div>
+    <div class="wrap">
+      <div class="skill-cols">
+        <div style="--c:var(--cyan)">
+          <h4 data-i18n="cat.lang">linguagens &amp; frameworks</h4>
+          <div class="tags"><span class="tag" data-skill="py">Python</span><span class="tag" data-skill="java">Java</span><span class="tag" data-skill="ts">TypeScript</span><span class="tag" data-skill="js">JavaScript</span><span class="tag" data-skill="sql">SQL</span><span class="tag" data-skill="node">Node.js / Express</span><span class="tag" data-skill="fastapi">FastAPI</span><span class="tag" data-skill="spring">Spring Boot</span><span class="tag" data-skill="next">Next.js / React</span></div>
+        </div>
+        <div style="--c:var(--mint)">
+          <h4 data-i18n="cat.infra">dados &amp; infraestrutura</h4>
+          <div class="tags"><span class="tag" data-skill="pg">PostgreSQL</span><span class="tag" data-skill="docker">Docker</span><span class="tag" data-skill="aws">AWS (EC2, DynamoDB, S3, ECS Fargate)</span><span class="tag" data-skill="tf">Terraform</span><span class="tag" data-skill="rabbit">RabbitMQ</span><span class="tag" data-skill="graf">Grafana / Prometheus</span></div>
+        </div>
+        <div style="--c:var(--rose)">
+          <h4 data-i18n="cat.data">ciência de dados &amp; otimização</h4>
+          <div class="tags"><span class="tag" data-skill="ml">Machine Learning</span><span class="tag" data-skill="eda">EDA</span><span class="tag" data-skill="fe">Feature Engineering</span><span class="tag" data-skill="pandas">Pandas / NumPy</span><span class="tag" data-skill="sk">Scikit-learn</span><span class="tag" data-skill="xgb">XGBoost</span><span class="tag" data-skill="simplex">Simplex</span><span class="tag" data-skill="bnb">Branch &amp; Bound</span><span class="tag" data-skill="ortools">OR-Tools</span><span class="tag" data-skill="kmeans" data-i18n="sk.kmeans">Clusterização</span></div>
+        </div>
+        <div style="--c:var(--yellow)">
+          <h4 data-i18n="cat.fund">fundamentos</h4>
+          <div class="tags"><span class="tag" data-skill="algo" data-i18n="sk.algo">Algoritmos e Estruturas de Dados</span><span class="tag" data-skill="graphs" data-i18n="sk.graphs">Teoria dos Grafos</span><span class="tag" data-skill="lp" data-i18n="sk.lp">Programação Linear</span><span class="tag" data-skill="scrum">Scrum / Agile</span><span class="tag" data-skill="git">Git / GitHub</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CH.04 PROJETOS ============ -->
+  <section id="projetos" class="section" data-ch="04" data-chname="PROJETOS" data-i18n-a="data-chname:ch.4">
+    <div class="wrap">
+      <div class="ch" data-i18n="proj.ch"><b>CH.04</b> projetos</div>
+      <h2 class="h2 glitchy" data-text="PROJETOS" data-decode data-i18n="proj.h2" data-i18n-a="data-text:proj.h2">PROJETOS</h2>
+      <p class="lead reveal" data-i18n="proj.lead">Quatro destaques entre os oito projetos que fiz com empresas parceiras do Inteli. Cada monitor é uma simulação interativa do problema, então vale mexer com o mouse em cada um.</p>
+
+      <div class="projects">
+        <article class="proj" id="p-pan">
+          <div class="monitor reveal" data-nocrack>
+            <canvas data-viz="pan" aria-label="Simulação de clusterização de clientes" data-i18n-a="aria-label:pan.a"></canvas>
+            <div class="mon-ui"><span>CH.04-A // kmeans + simplex</span><span data-i18n="mon.sim">sim. ilustrativa</span></div>
+            <div class="mon-hint" data-i18n="pan.hint">arraste os centróides</div>
+          </div>
+          <div class="proj-body">
+            <div class="proj-meta"><b>2026</b><span>Banco PAN</span></div>
+            <h3 data-decode data-i18n="pan.h3">Otimização de Limites Pré-Aprovados de Crédito</h3>
+            <p data-i18n="pan.p">Sistema de apoio à decisão para o Banco PAN definir limites pré-aprovados de cartão de crédito, equilibrando atratividade comercial, capacidade de pagamento e risco de inadimplência da carteira.</p>
+            <ul data-i18n="pan.ul">
+              <li>Implementei e comparei algoritmos de otimização linear (Simplex, OR-Tools, Branch &amp; Bound)</li>
+              <li>Segmentei clientes por perfil de risco com clusterização (KMeans / MiniBatchKMeans)</li>
+              <li>Construí uma API REST em FastAPI com processamento assíncrono via fila (RabbitMQ)</li>
+            </ul>
+            <div class="tags"><span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">OR-Tools</span><span class="tag">Scikit-learn</span><span class="tag">RabbitMQ</span><span class="tag">PostgreSQL</span><span class="tag">Next.js</span><span class="tag">Docker</span></div>
+          </div>
+        </article>
+
+        <article class="proj" id="p-globo">
+          <div class="monitor reveal" data-nocrack>
+            <canvas data-viz="globo" aria-label="Simulação de telemetria com detecção de anomalias" data-i18n-a="aria-label:globo.a"></canvas>
+            <div class="mon-ui"><span data-i18n="globo.mon">CH.04-B // telemetria ao vivo</span><span data-i18n="mon.sim">sim. ilustrativa</span></div>
+            <div class="mon-hint" data-i18n="globo.hint">rabisque sobre um canal para gerar uma anomalia</div>
+          </div>
+          <div class="proj-body">
+            <div class="proj-meta"><b>2026</b><span>Grupo Globo · Globoplay</span></div>
+            <h3 data-decode data-i18n="globo.h3">Plataforma de Telemetria de Frontend</h3>
+            <p data-i18n="globo.p">Plataforma de telemetria para o Globoplay que coleta e correlaciona eventos de reprodução e de erro de diferentes frontends, incluindo Smart TVs legadas, para identificar degradação de experiência em tempo real.</p>
+            <ul data-i18n="globo.ul">
+              <li>Projetei a API de ingestão e consulta de eventos de telemetria em alta escala</li>
+              <li>Implementei detecção de anomalias e correlação de causa provável entre incidentes</li>
+              <li>Provisionei infraestrutura como código (Terraform) na AWS: ECS Fargate, DynamoDB e Amplify</li>
+            </ul>
+            <div class="tags"><span class="tag">TypeScript</span><span class="tag">Express</span><span class="tag">Next.js</span><span class="tag">AWS</span><span class="tag">DynamoDB</span><span class="tag">ECS Fargate</span><span class="tag">Terraform</span><span class="tag">Grafana / Prometheus</span></div>
+          </div>
+        </article>
+
+        <article class="proj" id="p-suzano">
+          <div class="monitor reveal" data-nocrack>
+            <canvas data-viz="suzano" aria-label="Simulação de rotas mínimas até um foco de incêndio" data-i18n-a="aria-label:suz.a"></canvas>
+            <div class="mon-ui"><span data-i18n="suz.mon">CH.04-C // grafo de despacho</span><span data-i18n="mon.sim">sim. ilustrativa</span></div>
+            <div class="mon-hint" data-i18n="suz.hint">o cursor é o foco de incêndio</div>
+          </div>
+          <div class="proj-body">
+            <div class="proj-meta"><b>2026</b><span>Suzano</span></div>
+            <h3 data-decode data-i18n="suz.h3">Otimização de Recursos para Combate a Incêndios</h3>
+            <p data-i18n="suz.p">Sistema de otimização para alocar veículos e aeronaves no combate a incêndios florestais da Suzano, substituindo análises manuais por recomendações automáticas baseadas em teoria dos grafos.</p>
+            <ul data-i18n="suz.ul">
+              <li>Modelei a alocação como um grafo, considerando distância, clima e severidade do fogo</li>
+              <li>Implementei e comparei dois algoritmos de otimização (caminho mínimo e Network Simplex) em Java</li>
+              <li>Desenvolvi o backend em Spring Boot, com o domínio coberto por testes (JUnit)</li>
+            </ul>
+            <div class="tags" data-i18n="suz.tags"><span class="tag">Java</span><span class="tag">Spring Boot</span><span class="tag">Next.js</span><span class="tag">Maven</span><span class="tag">Teoria dos Grafos</span><span class="tag">Otimização Combinatória</span></div>
+          </div>
+        </article>
+
+        <article class="proj" id="p-fadel">
+          <div class="monitor reveal" data-nocrack>
+            <canvas data-viz="fadel" aria-label="Simulação de risco de falha mecânica com explicação SHAP" data-i18n-a="aria-label:fadel.a"></canvas>
+            <div class="mon-ui"><span data-i18n="fadel.mon">CH.04-D // manutenção preditiva</span><span data-i18n="mon.sim">sim. ilustrativa</span></div>
+            <div class="mon-hint" data-i18n="fadel.hint">mova o caminhão pelo mapa de risco</div>
+          </div>
+          <div class="proj-body">
+            <div class="proj-meta"><b>2025</b><span>Fadel Transportes e Logística</span></div>
+            <h3 data-decode data-i18n="fadel.h3">Modelo Preditivo de Manutenção Veicular</h3>
+            <p data-i18n="fadel.p">Modelo de machine learning para prever falhas mecânicas na frota de caminhões da Fadel, antecipando trocas de peças e reduzindo paradas não programadas.</p>
+            <ul data-i18n="fadel.ul">
+              <li>Fiz a análise exploratória (EDA) e o feature engineering em Python (Pandas, NumPy)</li>
+              <li>Treinei e comparei modelos (Random Forest, XGBoost, Logistic Regression)</li>
+              <li>Interpretei os resultados com SHAP e construí um dashboard em Streamlit</li>
+            </ul>
+            <div class="tags"><span class="tag">Python</span><span class="tag">Pandas</span><span class="tag">Scikit-learn</span><span class="tag">XGBoost</span><span class="tag">SHAP</span><span class="tag">Streamlit</span><span class="tag">Jupyter</span></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CH.05 FORMAÇÃO ============ -->
+  <section id="formacao" class="section" data-ch="05" data-chname="FORMAÇÃO" data-i18n-a="data-chname:ch.5">
+    <div class="wrap">
+      <div class="ch" data-i18n="edu.ch"><b>CH.05</b> formação &amp; prêmios</div>
+      <h2 class="sr-only" data-i18n="edu.h2">Formação</h2>
+    </div>
+    <div class="melt-wrap" data-nocrack>
+      <canvas id="melt" aria-hidden="true"></canvas>
+      <span class="melt-hint" data-i18n="edu.melt">passe o mouse para derreter os pixels</span>
+    </div>
+    <div class="wrap">
+      <div class="edu-grid">
+        <div class="card edu reveal">
+          <div class="card-tag" data-i18n="edu.tag">bacharelado</div>
+          <h3 data-decode data-i18n="edu.h3">Ciência da Computação</h3>
+          <p class="edu-school" data-i18n="edu.school">Inteli — Instituto de Tecnologia e Liderança · São Paulo, SP</p>
+          <p data-i18n="edu.p">Metodologia baseada em projetos reais em parceria com empresas multinacionais, com foco em engenharia de software, ciência de dados, arquitetura de sistemas e otimização.</p>
+          <div class="progress">
+            <div class="progress-row"><span data-i18n="edu.from">jan/2025</span><span id="edu-pct">—%</span><span data-i18n="edu.to">dez/2028</span></div>
+            <div class="bar"><span id="edu-bar"></span></div>
+          </div>
+        </div>
+        <div class="card reveal">
+          <div class="card-tag" data-i18n="edu.courses">cursos &amp; certificações</div>
+          <ul class="list" data-i18n="edu.courses.ul">
+            <li><b>Machine Learning Specialization</b><span>Coursera · Andrew Ng</span></li>
+            <li><b>Python para Análise de Dados</b><span>Alura</span></li>
+            <li><b>Fundações de Engenharia de Software</b><span>Alura · Design Patterns, SOLID, Clean Code</span></li>
+          </ul>
+          <div class="card-tag" style="margin-top:28px" data-i18n="edu.langs">idiomas</div>
+          <ul class="list" data-i18n="edu.langs.ul">
+            <li><b>Português</b><span>nativo</span></li>
+            <li><b>Inglês</b><span>avançado · fluente em conversação e comunicação técnica</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="badges">
+        <div class="badge reveal" style="--c:var(--yellow)"><span class="medal">AU</span><div data-i18n="badge.1"><b>Ouro</b><p>Olimpíada Canguru de Matemática · 2022–2024</p></div></div>
+        <div class="badge reveal" style="--c:#c9d1ff"><span class="medal">AG</span><div data-i18n="badge.2"><b>Prata</b><p>Olimpíada Brasileira de Física · 2022</p></div></div>
+        <div class="badge reveal" style="--c:var(--cyan)"><span class="medal" data-i18n="badge.3m">MH</span><div data-i18n="badge.3"><b>Menção Honrosa</b><p>OBMEP · 2022</p></div></div>
+        <div class="badge reveal" style="--c:var(--pink)"><span class="medal">#1</span><div data-i18n="badge.4"><b>1º Lugar</b><p>Concurso Pentágono de Redação · 2023</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CH.06 CONTATO ============ -->
+  <section id="contato" class="section" data-ch="06" data-chname="CONTATO" data-i18n-a="data-chname:ch.6">
+    <div class="wrap">
+      <div class="ch" data-i18n="ct.ch"><b>CH.06</b> contato</div>
+      <div class="contact-grid">
+        <div>
+          <h2 class="h2 glitchy" data-text="ERRO_404" data-decode data-i18n="ct.h2" data-i18n-a="data-text:ct.h2">ERRO_404</h2>
+          <p class="lead big reveal" data-i18n="ct.big">Vaga não encontrada… ainda.</p>
+          <p class="lead reveal" data-i18n="ct.lead">Estou procurando uma oportunidade em Data Science ou Engenharia de Software. Se você tem um problema difícil envolvendo dados, otimização ou sistemas, vamos conversar.</p>
+          <div class="contact-links">
+            <a href="mailto:lucas.m4ichel.pereira@gmail.com" data-label="enviar e-mail" data-i18n-a="data-label:ct.mail.l" data-hover>lucas.m4ichel.pereira@gmail.com</a>
+            <button class="copy" id="copy-email" type="button" data-label="copiar e-mail" data-i18n="ct.copy" data-i18n-a="data-label:ct.copy.l">[ copiar e-mail ]</button>
+            <a href="https://www.linkedin.com/in/lucas-m4ichel-pereira" target="_blank" rel="noopener" data-label="linkedin" data-hover>linkedin.com/in/lucas-m4ichel-pereira</a>
+            <span class="loc" data-i18n="ct.loc">São Paulo, SP · Brasil</span>
+          </div>
+        </div>
+        <figure class="wire-box" data-nocrack>
+          <canvas id="wire" aria-hidden="true"></canvas>
+          <figcaption data-i18n="ct.wire">a forma procura o seu cursor</figcaption>
+        </figure>
+      </div>
+    </div>
+    <footer class="foot wrap">
+      <span>© 2026 Lucas Michel Pereira</span>
+      <span data-i18n="foot.made">feito à mão com JavaScript puro, canvas e WebGL</span>
+      <span data-i18n="foot.tip">dica: experimente o konami code</span>
+    </footer>
+  </section>
+</main>
+
+<script src="js/i18n.js"></script>
+<script src="js/core.js"></script>
+<script src="js/fx.js"></script>
+<script src="js/cursor.js"></script>
+<script src="js/hero.js"></script>
+<script src="js/about.js"></script>
+<script src="js/graph.js"></script>
+<script src="js/projects.js"></script>
+<script src="js/melt.js"></script>
+<script src="js/contact.js"></script>
+<script src="js/boot.js"></script>
+</body>
+</html>
